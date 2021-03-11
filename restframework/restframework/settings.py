@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'authapp',
     'adminapp',
     'corsheaders',
+    'mainapp',
 ]
 
 MIDDLEWARE = [
@@ -114,10 +115,16 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 AUTH_USER_MODEL = 'authapp.User'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}

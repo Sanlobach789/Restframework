@@ -2,13 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import UserList from "./components/User";
+import ToDoList from "./components/Projects";
 import axios from 'axios';
 
 class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            'users': []
+            'users': [],
+            'toDoList': []
         }
     }
 
@@ -22,6 +24,16 @@ class App extends React.Component {
                     }
                 )
             }).catch(error => console.log(error))
+
+        axios.get('http://127.0.0.1:8000/api/todolist')
+            .then(response => {
+                const toDoList = response.data
+                this.setState(
+                    {
+                        'toDoList': toDoList
+                    }
+                )
+            }).catch(error => console.log(error))
     };
 
 
@@ -29,7 +41,9 @@ class App extends React.Component {
         return (
             <div>
                 <UserList users={this.state.users}/>
+                <ToDoList toDoList={this.state.toDoList}/>
             </div>
+
         )
     };
 }

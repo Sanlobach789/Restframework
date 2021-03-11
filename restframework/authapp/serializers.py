@@ -6,4 +6,4 @@ from authapp.models import User
 class UserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('uuid', 'first_name', 'last_name', 'email', 'age', 'avatar')
+        fields = ('uuid', 'username', 'first_name', 'last_name', 'email', 'age', 'avatar')

@@ -4,9 +4,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from authapp.views_api import UserViewSet
+from mainapp.views_api import ProjectViewSet, TodoListViewSet
 
 router = DefaultRouter()
 router.register('users', UserViewSet)
+router.register('projects', ProjectViewSet)
+router.register('todolist', TodoListViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
