@@ -15,9 +15,10 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/users')
+        axios.get('http://127.0.0.1:8000/api/users/')
             .then(response => {
-                const users = response.data
+                const users = response.data.results
+                console.log(users)
                 this.setState(
                     {
                         'users': users
@@ -25,9 +26,10 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
 
-        axios.get('http://127.0.0.1:8000/api/todolist')
+        axios.get('http://127.0.0.1:8000/api/todos/')
             .then(response => {
-                const toDoList = response.data
+                const toDoList = response.data.results
+                console.log(toDoList)
                 this.setState(
                     {
                         'toDoList': toDoList

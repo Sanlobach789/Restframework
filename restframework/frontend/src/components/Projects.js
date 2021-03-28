@@ -5,7 +5,7 @@ const ToDoItem = ({toDoItem}) => {
 
         <tr>
             <td>
-                {toDoItem.project}
+                {toDoItem.project.name}
             </td>
             <td>
                 {toDoItem.title}
@@ -14,7 +14,7 @@ const ToDoItem = ({toDoItem}) => {
                 {toDoItem.content}
             </td>
             <td>
-                {toDoItem.author}
+                {toDoItem.author.username}
             </td>
             <td>
                 {toDoItem.created}

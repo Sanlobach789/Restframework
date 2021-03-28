@@ -6,7 +6,8 @@ from mainapp.models import Project, TodoList
 
 
 class ProjectSerializer(HyperlinkedModelSerializer):
-    users = HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
+    related_users = UserModelSerializer(many=True, read_only=True)
+    # users = HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
 
     class Meta:
         model = Project
@@ -18,8 +19,8 @@ class ProjectReadSerializer(ModelSerializer):
     # Настройка Foreign Key
     # owner = HyperlinkedIdentityField(view_name='user-detail')
     # Настройка Many to many
-    # users = HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
-    users = UserModelSerializer(many=True, read_only=True)
+    # related_users = HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
+    related_users = UserModelSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
@@ -27,6 +28,9 @@ class ProjectReadSerializer(ModelSerializer):
 
 
 class TodoListSerializer(HyperlinkedModelSerializer):
+    project = ProjectSerializer(read_only=True)
+    author = UserModelSerializer(read_only=True)
+
     class Meta:
         model = TodoList
         fields = '__all__'
@@ -35,8 +39,10 @@ class TodoListSerializer(HyperlinkedModelSerializer):
 class ToDoReadSerializer(ModelSerializer):
     # project = HyperlinkedIdentityField(view_name='project-detail')
     # creator = HyperlinkedIdentityField(view_name='user-detail')
-    project = StringRelatedField()
-    creator = StringRelatedField()
+    # project = StringRelatedField()
+    project = ProjectSerializer
+    # author = StringRelatedField()
+    author = UserModelSerializer
 
     class Meta:
         model = TodoList
