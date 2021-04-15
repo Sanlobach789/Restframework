@@ -48,10 +48,11 @@ class App extends React.Component {
     }
 
     get_token(username, password) {
-        axios.post('http://127.0.0.1:8000/api-token-auth/', {username: username, password: password}.then(
-            response => {this.set_token(response.data['token'])
-            }).catch(error => alert('Wrong username or password'))
-        )
+        axios.post('http://127.0.0.1:8000/api-token-auth/', {username: username, password: password})
+            .then(response => {
+                this.set_token(response.data['token']);
+            })
+            .catch(error => alert('Wrong username or password'));
     }
 
     load_data() {

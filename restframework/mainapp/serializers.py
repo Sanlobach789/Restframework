@@ -5,6 +5,13 @@ from authapp.serializers import UserModelSerializer
 from mainapp.models import Project, TodoList
 
 
+class ProjectSerializerBase(HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
 class ProjectSerializer(HyperlinkedModelSerializer):
     related_users = UserModelSerializer(many=True, read_only=True)
     # users = HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
@@ -12,6 +19,11 @@ class ProjectSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ProjectSerializer
+        return ProjectSerializerBase
 
 
 class ProjectReadSerializer(ModelSerializer):
