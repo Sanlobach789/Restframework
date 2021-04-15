@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'mainapp',
     'drf_yasg',
+    "graphene_django",
 
 ]
 
@@ -125,6 +126,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
 ]
+
+GRAPHENE = {
+    "SCHEMA": "restframework.schema.schema"
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
